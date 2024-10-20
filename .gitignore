@@ -1,0 +1,42 @@
+# pycharm files
+.idea/
+
+# Ignore Visual Studio Code specific directory
+.vscode/
+
+# Python env
+.env/
+
+# Ignore Django migration files
+*/migrations/*.pyc
+*/migrations/*.py
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore local SQLite database
+*.sqlite3
+
+# Ignore log files
+*.log
+
+# Ignore macOS specific hidden files
+.DS_Store
+
+# Ignore test coverage files
+htmlcov/
+.coverage
+
+# Ignore compiled static files directory
+/static/
+
+
+# Ignore Django staticfiles and media
+/staticfiles/
+/media/
+/static/ckeditor/
+
+# Ignore environment configuration files
+.config_env
+
