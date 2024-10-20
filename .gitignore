@@ -31,6 +31,7 @@ htmlcov/
 # Ignore compiled static files directory
 /static/
 
+
 # Ignore Django staticfiles and media
 /staticfiles/
 /media/
@@ -39,3 +40,5 @@ htmlcov/
 # Ignore environment configuration files
 .env
 others/
+.config_env
+
