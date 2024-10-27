@@ -38,4 +38,4 @@ htmlcov/
 
 # Ignore environment configuration files
 .env
-
+others/
