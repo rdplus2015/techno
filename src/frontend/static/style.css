@@ -1,4 +1,9 @@
+
 body{
-        background-color:gray;
+        background-color: #0d1117;
+        color: #f0f4f8; /*#8b949e;  #58a6ff*/ 
+        font-family: "Roboto Flex", sans-serif;
+        font-weight: 900;
 }
+
 
