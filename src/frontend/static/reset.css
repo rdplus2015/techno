@@ -9,20 +9,23 @@
 /* === CSS Variables === */
 
 :root {
-    --color-link: #007bff; /* Color for links */
-    --color-link-hover: #0056b3; /* Clor on hover for links */
+    --color-link: #58a6ff; /* Color for links */
+    --color-link-hover: #0056b3; /* Color on hover for links */
 
     --color-input-border: #ccc; /* Color for input field borders */
+    --color-border:  rgba(255, 255, 255, 0.1);  /*border color*/
     --color-btn-bg: #007bff; /* Background color for buttons */
     --color-btn: #fff; /* Text color for buttons */ 
     --color-btn-hover: #0056b3; /* Background color for buttons on hover */
 
-    --color-main: #333333; /* Color for main text */
-    --color-main-bg: #ffffff; /* Color for the main background of the page */
-    --color-main-bg-sec: #ccc9c9; /* Color for the secondary background of the page */
+    --color-main: #f0f4f8; /* Color for main text */
+    --color-main-sec: #ccc; /* Color for main text */
+    --color-main-light: #ccccccaf; /* Color for main text */
+    --color-main-bg: #0d1117; /* Color for the main background of the page */
+    --color-main-bg-sec:  #151b23; /* Color for the secondary background of the page */
     
     --size-main: 16px; /* Base font size */
-    --font-main: sans-serif; /* Sans-serif font for the text */
+    --font-main: "Roboto Flex", sans-serif; /* Sans-serif font for the text */
     --mxw-container: 1075px; /* Maximum width for the container */
 }
 
@@ -46,21 +49,18 @@ body {
 
 /* === Block Element Behavior === */
 nav, article, aside, div, header, footer, section {
-    display: block; /* Ensures these elements are displayed as block-level elements */
-    width: 100%; /* Sets width to 100% for full responsiveness */
+    display: block;  /* Ensures these elements are displayed as block-level elements */
+    max-width:100%; /* Sets width to 100% for full responsiveness */
     padding: 10px; /* Adds default padding to all block elements */
 }
 
-/* Container for the main section */
-.container-col {
+/* Container for the principals section */
+.container {
     display: block; /* Ensures the container is displayed as a block */
     max-width: var(--mxw-container); /* Sets maximum width from variables */
     margin: 0 auto; /* Centers the container horizontally */
 }
 
-main section {
-    padding: 75px 0; /* Adds vertical padding to sections within main */
-}
 
 /* Remove padding for nested elements to avoid duplicate spacing */
 nav nav, nav article, nav aside, nav div, nav header, nav footer, nav section,
@@ -154,9 +154,11 @@ button {
     transition: background-color 0.3s ease; /* Smooth transition for background color change on hover */
 }
 
+
 button:hover {
     background-color: var(--color-btn-hover); /* Changes background color on hover */
 }
+
 
 /* === Table Styles === */
 table {
