@@ -27,7 +27,7 @@
                     <div>
                         <picture>
                             <source srcset="{% static 'img/img01.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/img01.webp' %}" alt="Article-image"  loading="lazy" class="post-img">
+                            <img src="{% static 'img/img01.jpg' %}" alt="Article-image"  loading="lazy" class="post-img">
                         </picture>       
                     </div>
                     <div class="post-body">
@@ -56,7 +56,7 @@
                     <div class="author-container">
                         <picture>
                             <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/user0.webp' %}" class="author-img" alt="user-image" loading="lazy">
+                            <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>      
                         <p> Joe Doe </p>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="post-img">
                         <picture>
                             <source srcset="{% static 'img/img02.webp' %}" type="image/webp"  loading="lazy">
-                            <img src="{% static 'img/img02.webp' %}" alt="Article-image" loading="lazy" class="post-img">
+                            <img src="{% static 'img/img02.jpg' %}" alt="Article-image" loading="lazy" class="post-img">
                         </picture>       
                     </div>
                     <div class="post-body">
@@ -101,7 +101,7 @@
                     <div class="author-container">
                         <picture>
                             <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/user0.webp' %}" class="author-img" alt="user-image" loading="lazy">
+                            <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>      
                         <p> Joe Doe </p>
                     </div>
@@ -143,6 +143,31 @@
                         <a href=""> read more </a>
                     </div>
                 </aside> -->
+            </div>
+        </section>
+        <section class="form-section">
+            <div class="container">
+                <div class="img-container">
+                    <picture>
+                        <source srcset="{% static 'img/formImage03.webp' %}" type="image/webp" loading="lazy">
+                        <img src="{% static 'img/formImage02.jpg' %}" class="form-img" alt="form-image" loading="lazy">
+                    </picture>   
+                    
+                </div>
+                <div class="form-container">
+                    <form action="" class="signup-form">
+                        <h2> Create an account </h2>
+                        <p>Do you have an account ? <a href="">Sign in </a> </p> 
+                        <div class="input-container">
+                            <input type="text" name="name" placeholder="Enter your name" required >
+                            <input type="email" name="email" placeholder="Enter your email" required>
+                            <input type="password" name="password" placeholder=" Enter your password" required>
+                            <input type="password" name="password-confirmation" placeholder=" Confirm your password" required>
+                        </div> 
+                        <button type="submit" name="signup-btn"> Submit </button>
+                    </form>
+                   
+                </div>
             </div>
         </section>
     </main>
