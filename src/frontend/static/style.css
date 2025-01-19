@@ -1,58 +1,72 @@
 @import url("reset.css");
 
-/* Header style */ 
 
-.header-container{
-        display: grid;
-        grid-template-columns: repeat(2, 50%);
-        grid-template-rows: 2rem;
-        align-items: center;
-        justify-items: center;
+/* Header style */ 
+.header-section{
         border-bottom: 0.1px solid var(--color-border);
         margin-bottom: 25px;
 }
 
-.header-container .logo-container{
+.header-section .container{
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: 2rem;
+        align-items: center;
+        justify-items: center; 
+}
+
+.header-section .container .logo-container{
         grid-column: 1;
 }
 
-.header-container .icons-container{
+.header-section .container .icons-container{
         grid-column: 2;
         padding-top: 7px;
 }
 
-.icons-container .research-icon, .login-icon{
-        display: none;
+.header-section .icons-container svg {       
+        color:  var(--color-main);
+        width: 55px;
+        transition: color 0.3s ease; /* Smooth transition for color change on hover */
 }
-.logo-container .logo{
+
+.header-section .icons-container svg:hover{
+        color: var(--color-main-sec);
+}
+
+.header-section .logo-container .logo{
         font-size: 1.2rem;
 }
 
 
 /* Footer Style*/
-
-.footer-container{
+.footer-section{
         border-top:0.1px solid var(--color-border);
+}
+
+.footer-section .container{
         display: grid;
         grid-template-rows: repeat(2, 1.5rem);
         justify-items: center;
-        align-items: center;   
+        align-items: center;
+        margin-top: 5px;   
 }
 
-.social-icons{
+.footer-section .container .social-icons{
         grid-row: 1;
 }
 
-.social-icons svg{
+.footer-section .social-icons svg{
         color: var(--color-main-sec);
         width: 18px;
         transition: color 0.3s ease; /* Smooth transition for color change on hover */
 }
-.social-icons svg:hover{
+
+.footer-section .social-icons svg:hover{
         color: var(--color-main);
 }
 
-.copyright{
+.footer-section .container .copyright{
         grid-row: 2;
         font-size: 0.6rem;
         font-weight: 400;
@@ -61,17 +75,12 @@
 
 
 /*Category section*/ 
-.section-category{
+.category-section{
         display: none;
 }
 
-
-/*
-post section 
-- Style for the section who contains all post
-*/ 
-
-.post-section{
+/* Post Section */ 
+.post-section .container{
         display: grid;
 
 }
@@ -80,77 +89,66 @@ post section
      display: none;
 }
 
-/* Post  style 
-- specific style for each post
-*/
-
-.post-section .post-container{
+/* Post style  */
+.post-section .container .post-container{
         display: flex;
         flex-direction: column;
-        background-color: var(--color-main-bg-sec);
-        padding: 0 5px;
+        padding: 15px;
         margin-bottom: 20px;
+        background-color: var(--color-main-bg-sec);
+        border-radius: 7px;
 } 
 
-.post-container .post-img{
+/* Post image  */
+.post-section .post-container .post-img{
         width: 100%;
         height: 300px;
         object-fit: cover;
-        margin: 5px auto 10px auto;
-        
+        border-radius: 7px;
 }
 
-/* Post body
-
-- Style for the body of the post (header, category, title, description)
-*/
-
 /* post header*/
-
-.post-body .post-header{
+.post-section .post-body .post-header{
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
 }
 
-.post-body .post-header svg{
+.post-section .post-header svg{
     padding-top: 7px;
     width: 18px;
     color: var(--color-main-sec);
 }
 
-.post-body .post-header p {
+.post-section .post-header p {
         font-size: 0.7rem;
         color: var(--color-main-sec);
     }
 
 /* post category, title, description*/
-.post-body .category-container{
+.post-section .post-body .category-container{
         display: flex;       
 }
 
-.post-body .category-container .category{
+.post-section .category-container .category{
         font-size: 0.6rem;
         color: var(--color-link);
         margin: 0 3px;
         padding: 5px;
         background-color: var(--color-main-bg);
 }
-.post-body .post-title{
+.post-section .post-body .post-title{
         font-size: 1.4rem;
 }
 
-.post-body .post-description{
+.post-section .post-body .post-description{
         font-size: 1rem;
         color: var(--color-main-sec);
-       
 }
 
-
 /* author container */ 
-
-.post-container .author-container{
+.post-section .post-container .author-container{
         display: flex;
         font-size: 1rem;
         color: var(--color-main);
@@ -159,20 +157,19 @@ post section
         margin-top: 5px;
 }
 
-.post-container .author-container .author-img{
+.post-section .author-container .author-img{
         width: 30px;
         height: 30px;
         border-radius: 50%;
         object-fit: cover;
 }
 
-.post-container .author-container p{
+.post-section .author-container p{
         padding-bottom: 5px;
 }
 
-/*REad more */ 
-
-.post-container .read-more{
+/*Read more */ 
+.post-section .post-container .read-more{
         display: flex;
         font-size: 0.8rem;
         align-items: center;
@@ -180,7 +177,7 @@ post section
         gap: 5px;  
 }
 
-.post-container .read-more svg{
+.post-section.read-more svg{
         width: 20px;
         padding-top: 3px;
 }
