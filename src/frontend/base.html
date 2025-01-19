@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Own Style Sheet-->
+    <link rel="stylesheet" href="{% static 'reset.css' %}"> 
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+    <title> {% block title %} {% endblock %} </title>  <!-- Title of the HTML document defines in each file -->
+</head>
+<body>
+        <!-- Blog Header-->
+        <header class="header-section"> 
+                <div class="container ">
+                        <div class="logo-container">
+                                <!-- Logo-->
+                                <h3 class="logo"> Techno</h3>
+                            </div>
+                            <div class="icons-container">
+                                <!-- login infos-->           
+                                <a href="{% static 'loginForm.html' %}">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white login-icom" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                                    </svg>     
+                                </a>
+                        </div>
+                </div> 
+        </header>
+
+        {%block main %} {% endblock %}   <!-- The main content of the HTML document ! defines in eaach file-->
+
+        <!-- Blog Footer-->
+        <footer class="footer-section">
+                <!-- Footer -->
+                <div class="container">
+                        <div class="social-icons"> 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
+                                </svg>
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
+                                </svg>
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-label="facebook" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
+                                </svg>
+                                
+                        </div>
+                        <div class="copyright">
+                                <p>&copy; <span id="year"></span> Techno. All rights reserved.</p>
+                                <script>
+                                document.getElementById("year").textContent = new Date().getFullYear();
+                                </script>
+                        </div>     
+                </div>
+        </footer>
+</body>
+</html>
