@@ -38,7 +38,7 @@ class TechnoUserManager(BaseUserManager):
 class TechnoUser(AbstractBaseUser, PermissionsMixin):
     # Define fields for the custom user model
     email = models.EmailField(unique=True)
-    pseudonym = models.CharField(max_length=30, unique=True)
+    pseudonym = models.CharField(max_length=12, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -47,7 +47,6 @@ class TechnoUser(AbstractBaseUser, PermissionsMixin):
     objects = TechnoUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['pseudonym']
 
     #Validation of the pseudonym field
     def clean_pseudonym(self):
