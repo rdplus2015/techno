@@ -4,7 +4,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.urls import reverse_lazy, reverse
 
-from src.accounts.forms import SignUpForm
+from accounts.forms import SignUpForm
 
 
 # Create your views here.

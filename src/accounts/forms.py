@@ -10,7 +10,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()  # Telling Django to use TechnoUser model for the fields
-        fields = ('email', 'pseudonym', 'password1', 'password2')  # Defining the fields to be included in the form
+        fields = ('pseudonym', 'email', 'password1', 'password2')  # Defining the fields to be included in the form
 
     def save(self, commit=True):
         user = super().save(commit=False)  # Calling the parent class's save method with commit=False to get a user instance without saving it to the database yet.
@@ -31,4 +31,4 @@ class SignUpForm(UserCreationForm):
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'pseudonym', )
+        fields = ('email', 'pseudonym',)
