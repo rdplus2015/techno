@@ -1,4 +1,6 @@
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
@@ -9,7 +11,8 @@ from accounts.forms import SignUpForm
 
 # Create your views here.
 
-class SignUp(View):
+# Sign-up view for handling user registration
+class UserSignupView(View):
     # Specifies the template to be used for rendering the sign-up page.
     template_name = 'registration/signup.html'
 
@@ -40,3 +43,28 @@ class SignUp(View):
     def get_redirect_url(self):
         """Return the URL to redirect authenticated users."""
         return reverse('index')  # Redirect to the dashboard
+
+# Custom login view that redirects authenticated users to the Blog index page
+class UserLoginView(LoginView):
+    template_name = 'registration/login.html' # Template for the login page
+    redirect_authenticated_user = True # Redirect already logged-in users
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next') # Get the 'next' parameter from the template
+        if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={self.request.get_host()}):
+            return next_url # Redirect to the 'next' URL if it's safe
+        return  reverse('index') # redirect to the Blog index page
+
+# Custom and secure logoutView
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('index') # Default URL to redirect to after logout
+
+    def post(self, request, *args, **kwargs):
+        next_url = request.POST.get('next') # Get the 'next' URL from the POST request
+        if next_url and url_has_allowed_host_and_scheme(url=next_url, allowed_hosts={request.get_host()}):
+            self.next_page = next_url  # Set next_page to the safe 'next' URL
+        return super().post(request, *args, **kwargs) # Call the parent method
+
+    def get(self, request, *args, **kwargs):
+        return  HttpResponseNotAllowed(['POST']) # Only allow POST requests for logout
+
