@@ -1,12 +1,13 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.urls import reverse_lazy, reverse
+from django.views.generic import UpdateView
 
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, UserUpdateForm
 
 
 # Create your views here.
@@ -68,3 +69,15 @@ class UserLogoutView(LogoutView):
     def get(self, request, *args, **kwargs):
         return  HttpResponseNotAllowed(['POST']) # Only allow POST requests for logout
 
+# Custom view for update user information, restricted to logged-in users
+class UserUpdateView(UpdateView):
+    model = get_user_model()
+    form_class = UserUpdateForm
+    template_name = 'profile/security/updateUser.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        return  self.request.user
+
+
+class
