@@ -1,11 +1,11 @@
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, request
 from django.shortcuts import render, redirect
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.urls import reverse_lazy, reverse
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 
 from accounts.forms import SignUpForm, UserUpdateForm
 
@@ -80,4 +80,10 @@ class UserUpdateView(UpdateView):
         return  self.request.user
 
 
-class
+class DeleteUserView(DeleteView):
+    model = get_user_model()
+    template_name = 'profile/security/deleteUser.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        return self.model.objects.get(pk=self.request.user.pk)

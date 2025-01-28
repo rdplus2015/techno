@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% block title %} SignUp {% endblock %}
+{% block main %}
+
+<main>
+  <h2>Are you sure you want to delete your account?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete my account</button>
+        <a href="{% url 'index' %}">No, take me back</a>
+    </form>
+</main>
+
+{% endblock %}
+
+
+
+
+
+
+
