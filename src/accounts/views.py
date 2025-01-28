@@ -8,6 +8,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView, DeleteView
 
 from accounts.forms import SignUpForm, UserUpdateForm
+from techno.mixims import TechnoLoginRequiredMixin
 
 
 # Create your views here.
@@ -57,7 +58,7 @@ class UserLoginView(LoginView):
         return  reverse('index') # redirect to the Blog index page
 
 # Custom and secure logoutView
-class UserLogoutView(LogoutView):
+class UserLogoutView(LogoutView, TechnoLoginRequiredMixin):
     next_page = reverse_lazy('index') # Default URL to redirect to after logout
 
     def post(self, request, *args, **kwargs):
@@ -70,7 +71,7 @@ class UserLogoutView(LogoutView):
         return  HttpResponseNotAllowed(['POST']) # Only allow POST requests for logout
 
 # Custom view for update user information, restricted to logged-in users
-class UserUpdateView(UpdateView):
+class UserUpdateView(UpdateView, TechnoLoginRequiredMixin):
     model = get_user_model()
     form_class = UserUpdateForm
     template_name = 'profile/security/updateUser.html'
@@ -80,7 +81,7 @@ class UserUpdateView(UpdateView):
         return  self.request.user
 
 
-class DeleteUserView(DeleteView):
+class DeleteUserView(DeleteView, TechnoLoginRequiredMixin):
     model = get_user_model()
     template_name = 'profile/security/deleteUser.html'
     success_url = reverse_lazy('index')

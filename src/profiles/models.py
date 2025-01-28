@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-class UserProfiles(models.Model):
+class UserProfile(models.Model):
     # Link the profil to the use
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     bio = models.CharField(max_length=150, blank=True)
