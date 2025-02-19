@@ -1,12 +1,31 @@
 {% extends "base.html" %}
-{% block title %} SignUp {% endblock %}
+{% load static %}
+{% block title %} Login {% endblock %}
 {% block main %}
 <main>
-    <h1> Login form </h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <section class="registration-form-section">
+        <div class="container">
+            <div class="img-container">
+                <picture>
+                    <source srcset="{% static 'img/formImage03.webp' %}" type="image/webp" loading="lazy">
+                    <img src="{% static 'img/formImage02.jpg' %}" class="form-img" alt="form-image" loading="lazy">
+                </picture>   
+                
+            </div>
+            
+            <div class="form-container">
+                <form method="post" class="signup-form">
+                    {% csrf_token %}
+                    <h2> Login to your account  </h2>
+                    <p>Don't you have an account ? <a href="{% url 'signup' %}"> Sign up </a> </p> 
+                    <div class="input-container">
+                       {{form.username}}
+                       {{form.password}}
+                    </div> 
+                    <button type="submit" name="signup-btn"> Submit </button>
+                </form>
+            </div>
+        </div>
+    </section>
 </main>
 {% endblock %}

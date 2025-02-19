@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
 
 
@@ -32,3 +32,21 @@ class UserUpdateForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = ('email', 'pseudonym',)
+
+
+
+class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'placeholder': 'Enter your email',
+            'class': 'form-control'
+        })
+        self.fields['username'].label = ''
+
+        self.fields['password'].widget.attrs.update({
+            'placeholder': 'Enter your password',
+            'class': 'form-control'
+        })
+        self.fields['password'].label = ''
+

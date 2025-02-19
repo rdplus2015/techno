@@ -22,18 +22,28 @@
                 <div class="container ">
                         <div class="logo-container">
                                 <!-- Logo-->
-                                <h3 class="logo"> Techno</h3>
-                            </div>
-                            <div class="icons-container">
-                                <!-- login infos-->           
-                                <a href="{% static 'loginForm.html' %}">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white login-icom" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
-                                    </svg>     
-                                </a>
+                               <a href="{% url 'index' %}" target="_self" rel="noopener noreferrer"> <h3 class="logo"> Techno</h3></a>
+                        </div>
+                        <div class="icons-container">
+                                <!-- login infos-->
+                                {% if user.is_authenticated %}           
+                                        <a href="{% url 'profile' %}">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white login-icom" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                                                </svg>     
+                                        </a>
+                                {% else %}
+                                        <a href="{% url 'login' %}">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white login-icom" aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                                                </svg>     
+                                        </a>
+                                {% endif %}
                         </div>
                 </div> 
         </header>
+        <!--
+       
         <section>
             <h3> Test </h3>
             {% if user.is_authenticated %}
@@ -48,7 +58,7 @@
                 <p><a href="{% url 'login' %}"> login </a></p>
             {% endif %}
         </section>
-
+         -->
         {%block main %} {% endblock %}   <!-- The main content of the HTML document ! defines in eaach file-->
 
         <!-- Blog Footer-->

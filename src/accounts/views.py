@@ -7,7 +7,7 @@ from django.views import View
 from django.urls import reverse_lazy, reverse
 from django.views.generic import UpdateView, DeleteView
 
-from accounts.forms import SignUpForm, UserUpdateForm
+from accounts.forms import SignUpForm, UserUpdateForm, LoginForm
 from techno.mixims import TechnoLoginRequiredMixin
 
 
@@ -50,7 +50,7 @@ class UserSignupView(View):
 class UserLoginView(LoginView):
     template_name = 'registration/login.html' # Template for the login page
     redirect_authenticated_user = True # Redirect already logged-in users
-
+    authentication_form = LoginForm
     def get_success_url(self):
         next_url = self.request.GET.get('next') # Get the 'next' parameter from the template
         if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={self.request.get_host()}):

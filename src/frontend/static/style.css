@@ -17,6 +17,11 @@
 
 .header-section .container .logo-container{
         grid-column: 1;
+        
+}
+
+.header-section .container .logo-container *{
+        color: var(--color-main);        
 }
 
 .header-section .container .icons-container{
@@ -36,6 +41,12 @@
 
 .header-section .logo-container .logo{
         font-size: 1.2rem;
+}
+
+
+
+.header-section .icons-container .login-menu *{
+       margin: 0;
 }
 
 
@@ -186,33 +197,34 @@
 
 /* SighUp form */ 
 
-.form-section .container{
+.registration-form-section .container{
         display: flex;
         flex-direction: column;
         align-items: center;
         background-color: var(--color-main-bg-sec);
         border-radius: 7px;
+        margin: 100px auto;
 }
-.form-section .container .img-container{
+.registration-form-section .container .img-container{
         display: none;
         /* width: 550px;
         padding: 10px 10px 0px 10px; */ 
 
 }
 
-/* .form-section .container .form-img{
+/* .registration-form-section .container .form-img{
         width: 100%;
         height: 500px;
         object-fit: cover;
         border-radius: 7px;
 } */ 
 
-.form-section .container .form-container{
+.registration-form-section .container .form-container{
         margin: 0 auto;
         padding: 30px 10px;
 }
 
-.form-section .form-container form{
+.registration-form-section .form-container form{
         display: flex;
         flex-direction: column;
         align-items: center;
