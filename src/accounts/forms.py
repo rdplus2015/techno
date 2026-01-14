@@ -34,7 +34,6 @@ class UserUpdateForm(UserChangeForm):
         fields = ('email', 'pseudonym',)
 
 
-
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
