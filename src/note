@@ -1,0 +1,7 @@
+check points
+    -
+    - blank fields
+    - required fields
+    - get the user model dynamiquely from settings.py file
+    - the verboseName, related_name, tostring methodes
+    - the mexims (secursiser les acces)
