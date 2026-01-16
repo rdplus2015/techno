@@ -23,7 +23,7 @@ class UserProfileView(DetailView, TechnoLoginRequiredMixin):
 # View to update user profile details
 class UserProfileUpdate(UpdateView, TechnoLoginRequiredMixin):
     model = UserProfile
-    fields = ['bio', 'city']
+    fields = ['bio', 'city', 'name']
     template_name = 'profile/ProfileUpdate.html'
     success_url = reverse_lazy('profile')
 

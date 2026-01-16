@@ -27,5 +27,6 @@ urlpatterns = [
     path('postview', postview, name='postview'),
     path('', include('accounts.urls')),
     path('', include('profiles.urls')),
+    path('', include('blog.urls')),
 ]
 

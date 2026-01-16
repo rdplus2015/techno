@@ -76,7 +76,7 @@ class Posts(models.Model):
 
     class Meta:
         verbose_name = "Article"
-        ordering = ["pk", "created_at", "status"]
+        ordering = ["-created_at", "pk", "status"]
 
     def save(self, *args, **kwargs):
         """

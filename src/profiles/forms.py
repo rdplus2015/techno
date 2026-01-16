@@ -7,4 +7,4 @@ from profiles.models import UserProfile
 class ProfileForm(forms.ModelForm):
     class Meta:
         mmodel = UserProfile
-        fields = ('bio', 'city')
+        fields = ('bio', 'city', 'name')

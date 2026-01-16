@@ -4,7 +4,7 @@ from django.shortcuts import render
 # simple view for hmtl and css template
 
 def index(request):
-    return render(request, 'post/postList.html')
+    return render(request, 'blog/postList.html')
 
 def postview(request):
-    return render(request, 'post/postView.html')
+    return render(request, 'blog/postView.html')
