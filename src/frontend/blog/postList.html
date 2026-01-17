@@ -24,7 +24,7 @@
 
          <!-- Blog Post Section -->
         <section class="post-section">
-            <div class="container">
+            <div class="container post-list">
                 <h3 class="latest-tag"> Latest Articles </h3>
 
                 {% for post in posts %}
@@ -75,10 +75,10 @@
                             <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
                             <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>
-                        <p> {{post.author.profile}} </p>
+                        <p> <span style="color: #cccccc"> {{post.author.pseudonym}} </span>  | {{post.author.profile.name}}  </p>
                     </div>
 
-                    <a href=" {% url 'postview'%}" class="read-more">
+                    <a href=" {% url 'postdetail' post.slug %} " class="read-more">
                         <span> read more  </span>
                         <svg class="aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
