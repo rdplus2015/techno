@@ -31,9 +31,13 @@
                 <article class="post-container">
                     <div>
                         <picture>
-                            <source srcset="{% static 'img/img01.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/img01.jpg' %}" alt="Article-image"  loading="lazy" class="post-img">
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy" class="post-img">
+                            {% else %}
+                                <img src="{% static 'img/notfound.png' %}" alt="{{ post.title }}" loading="lazy" class="post-img">
+                            {% endif %}
                         </picture>
+
                     </div>
                     <div class="post-body">
                         <div class="post-header">
@@ -52,8 +56,16 @@
                             </div>
                         </div>
                         <div class="category-container">
-                            <p class="category"> tech </p> <p class="category"> java </p> <p class="category"> python </p> <p class="category"> devops </p>
+                                {% if post.category.exists %}
+                                      {% for category in post.category.all %}
+                                        <p  class="category">{{ category.name }}</p>
+                                      {% endfor %}
+                                {% else %}
+                                    <p class="category">No category</p>
+                                {% endif %}
                         </div>
+
+
                         <h2 class="post-title"> {{post.title}} </h2>
                         <p class="post-description"> {{post.description}} </p>
                     </div>
