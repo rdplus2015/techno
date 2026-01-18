@@ -6,7 +6,11 @@
 </head>
 <body>
 {% for category in categories %}
-<p> {{ category.name }} </p>
+<p> {{ category.name }}
+    <a href="{% url 'updatecategory' category.pk %} ">update</a>
+
+</p>
+
 {% endfor %}
 </body>
 </html>

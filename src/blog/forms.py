@@ -16,4 +16,5 @@ class PostForm(forms.ModelForm):
         widgets = {
             "description": forms.Textarea(attrs={"rows": 3}),
             "content": forms.Textarea(attrs={"rows": 8}),
+            "categories": forms.CheckboxSelectMultiple(),  #  SelectMultiple
         }
