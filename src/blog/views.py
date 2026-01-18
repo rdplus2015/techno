@@ -94,6 +94,6 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy("index")
 
     def get_queryset(self):
-        return Category.objects.filter(author=self.request.user)
+        return Posts.objects.filter(author=self.request.user)
 
 
