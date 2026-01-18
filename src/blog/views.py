@@ -11,18 +11,27 @@ from blog.models import Posts, Category
 class CreateCategoryView(CreateView):
     model = Category
     fields = ["name"] # Use field instead pf a form
-    template_name = "blog/categorycreate.html"
+    template_name = "blog/categoryCreate.html"
     success_url = reverse_lazy("createpost")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class ListCategoryView(ListView):
+    model = Category
+    fields = ["name"]
+    template_name = "blog/categoryList.html"
+    context_object_name = "categories"
 
 class UpdateCategoryView(UpdateView):
     model = Category
-    template_name = "blog/categoryupdate.html"
+    template_name = "blog/categoryUpdate.html"
+    success_url = reverse_lazy("createpost")
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 # Posts view

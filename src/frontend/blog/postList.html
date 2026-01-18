@@ -3,8 +3,6 @@
 {% block title %} {% endblock %}
 {%block main%} 
     <main>
-
-        <br>
         <!-- Blog navigation -->
         <section class="category-section">
             <div class="container">
@@ -25,8 +23,6 @@
          <!-- Blog Post Section -->
         <section class="post-section">
             <div class="container post-list">
-                <h3 class="latest-tag"> Latest Articles </h3>
-
                 {% for post in posts %}
                 <article class="post-container">
                     <div>
@@ -86,82 +82,6 @@
                     </a>
                 </article>
                 {% endfor %}
-
-
-                <article class="post-container">
-                    <div class="post-img">
-                        <picture>
-                            <source srcset="{% static 'img/img02.webp' %}" type="image/webp"  loading="lazy">
-                            <img src="{% static 'img/img02.jpg' %}" alt="Article-image" loading="lazy" class="post-img">
-                        </picture>       
-                    </div>
-                    <div class="post-body">
-                        <div class="post-header">
-                            <p> February 02, 2024</p>
-                            <div>
-                                <svg class="like-icon w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                </svg>                              
-                                <svg class="share-icon" aria-label="share" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>
-                                </svg>
-                                <svg class="save-icon" aria-label="save" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>                                               
-                            </div>
-                        </div>
-                        <div class="category-container">
-                            <p class="category"> tech </p> <p class="category"> java </p> <p class="category"> python </p> <p class="category"> devops </p>
-                        </div>
-                        <h2 class="post-title"> Embracing life in the era of artificial intelligence </h2>
-                        <p class="post-description"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro perferendis in, qui itaque dolore ipsam sunt? Corporis consectetur nam sint nostrum labore neque itaque sunt explicabo deleniti, ipsa aperiam. Dolorem?</p>
-                    </div>
-                    
-                    <div class="author-container">
-                        <picture>
-                            <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
-                        </picture>      
-                        <p> Joe Doe </p>
-                    </div>
-                    
-                    <a href="#" class="read-more"> 
-                        <span> read more  </span>
-                        <svg class="aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                        </svg> 
-                    </a>    
-                </article>
-                <!--
-                <aside>
-                    Most liked articles 
-                    <div>
-                        <img src="" alt="article-img">
-                            <div>
-                                <p> 02/02/2024</p>
-                                <div>
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-label="share" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>
-                                    </svg>
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-label="save" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                    </svg>   
-                                </div>
-                            </div>
-                        <p> Tech </p>
-                    </div>
-                    <div>
-                        <h2> Embracing life in the era of artificial intelligence </h2>
-                        <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro perferendis in, qui itaque dolore ipsam sunt? Corporis consectetur nam sint nostrum labore neque itaque sunt explicabo deleniti, ipsa aperiam. Dolorem?</p>
-                        <div>
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white"  aria-label="user" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
-                            </svg>                      
-                            <p> Joe Doe </p>
-                        </div>
-                        <a href=""> read more </a>
-                    </div>
-                </aside> -->
             </div>
         </section>
     </main>
