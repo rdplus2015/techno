@@ -24,6 +24,9 @@ class ListCategoryView(ListView):
     template_name = "blog/categoryList.html"
     context_object_name = "categories"
 
+    def get_queryset(self):
+        return Category.objects.filter(author=self.request.user).order_by("name")
+
 
 class UpdateCategoryView(UpdateView):
     model = Category
@@ -31,10 +34,12 @@ class UpdateCategoryView(UpdateView):
     fields = ["name"]
     success_url = reverse_lazy("listecategories")
 
+    def get_queryset(self):
+        return Category.objects.filter(author=self.request.user)
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
 
 
 class DeleteCategoryView(DeleteView):
@@ -51,7 +56,7 @@ class CreatePostView(CreateView):
     model = Posts
     form_class = PostForm
     template_name = "blog/postCreate.html"
-    success_url = reverse_lazy("posts")
+    success_url = reverse_lazy("index")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -70,9 +75,25 @@ class PostDetailView(DetailView):
 
 
 class UpdatePostView(UpdateView):
-    pass
+    model = Posts
+    template_name = "blog/postUpdate.html"
+    form_class = PostForm
+    success_url = reverse_lazy("index")
+
+    def get_queryset(self):
+        return Posts.objects.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class DeletePostView(DeleteView):
-    pass
+    model = Posts
+    template_name = "blog/postDelete.html"
+    success_url = reverse_lazy("index")
+
+    def get_queryset(self):
+        return Category.objects.filter(author=self.request.user)
+
 

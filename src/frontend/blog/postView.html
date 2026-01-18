@@ -64,6 +64,9 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
                         </svg>
                     </a>
+
+                     <a href="{% url 'updatepost' post.pk %} ">update</a>
+                    <a href="{% url 'deletepost' post.slug %} ">delete</a>
                 </article>
        </section>
     </main>
