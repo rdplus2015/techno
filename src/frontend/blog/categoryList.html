@@ -8,6 +8,7 @@
 {% for category in categories %}
 <p> {{ category.name }}
     <a href="{% url 'updatecategory' category.pk %} ">update</a>
+    <a href="{% url 'deletecatgory' category.pk %} ">delete</a>
 
 </p>
 

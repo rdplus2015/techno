@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from blog.forms import PostForm
@@ -12,11 +11,12 @@ class CreateCategoryView(CreateView):
     model = Category
     fields = ["name"] # Use field instead pf a form
     template_name = "blog/categoryCreate.html"
-    success_url = reverse_lazy("createpost")
+    success_url = reverse_lazy("listecategories")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class ListCategoryView(ListView):
     model = Category
@@ -24,14 +24,26 @@ class ListCategoryView(ListView):
     template_name = "blog/categoryList.html"
     context_object_name = "categories"
 
+
 class UpdateCategoryView(UpdateView):
     model = Category
     template_name = "blog/categoryUpdate.html"
-    success_url = reverse_lazy("createpost")
+    fields = ["name"]
+    success_url = reverse_lazy("listecategories")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+
+class DeleteCategoryView(DeleteView):
+    model = Category
+    template_name = "blog/categoryDelete.html"
+    success_url = reverse_lazy("listecategories")
+
+    def get_queryset(self):
+        return Category.objects.filter(author=self.request.user)
 
 
 # Posts view

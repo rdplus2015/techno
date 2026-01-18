@@ -1,0 +1,5 @@
+<form method="post">
+  {% csrf_token %}
+  <p>Delete category "{{ object.name }}" ?</p>
+  <button type="submit">Yes, delete</button>
+</form>
