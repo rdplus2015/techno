@@ -69,24 +69,22 @@
                     <a href="{% url 'deletepost' post.slug %} ">delete</a>
 
                 </article>
+                <article>
+                    <hr>
+                    <h3>Commentaires</h3>
+                    {% for comment in comments %}
+                        <p><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
+                    {% empty %}
+                        <p>Aucun commentaire pour le moment.</p>
+                    {% endfor %}
 
-                <h2>{{ post.title }}</h2>
-<p>{{ post.content }}</p>
-
-<hr>
-<h3>Commentaires</h3>
-{% for comment in comments %}
-    <p><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
-{% empty %}
-    <p>Aucun commentaire pour le moment.</p>
-{% endfor %}
-
-<hr>
-<form method="post" action="{% url 'testcomment' post.id %}">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit">Commenter</button>
-</form>
+                    <hr>
+                    <form method="post" action="{% url 'testcomment' post.slug %}">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <button type="submit">Commenter</button>
+                    </form>
+                </article>
        </section>
     </main>
 {%endblock%}

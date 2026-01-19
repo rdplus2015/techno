@@ -107,12 +107,7 @@ class DeletePostView(DeleteView):
 
 
 
-# Post
-class PostCommentView(ListView):
-    model = PostComment
-    template_name = "blog/postList.html"
-    context_object_name = "comments"
-
+# comments
 class CreateCommentView(CreateView):
     model = PostComment
     form_class = PostCommentForm
@@ -121,9 +116,9 @@ class CreateCommentView(CreateView):
         # On lie l'auteur
         form.instance.author = self.request.user
         # On lie le post grâce à l'ID dans l'URL (ex: <int:post_id>)
-        form.instance.post = Posts.objects.get(pk=self.kwargs['post_id'])
+        form.instance.post = Posts.objects.get(slug=self.kwargs['post_slug'])
         return super().form_valid(form)
 
     def get_success_url(self):
         # Redirige vers le post après le commentaire
-        return reverse_lazy('blog:postdetail', kwargs={'pk': self.kwargs['post_id']})
+        return reverse_lazy('postdetail', kwargs={'slug': self.kwargs['post_slug']})

@@ -20,5 +20,5 @@ urlpatterns = [
     path('deletecategory/<int:pk>/', DeleteCategoryView.as_view(), name='deletecatgory'),
 
     #Comments
-    path('testcomment/<int:post_id>/', CreateCommentView.as_view(), name='testcomment'),
+    path('testcomment/<slug:post_slug>/', CreateCommentView.as_view(), name='testcomment'),
 ]
