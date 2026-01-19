@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from blog.forms import PostForm
-from blog.models import Posts, Category
+from blog.forms import PostForm, PostCommentForm
+from blog.models import Posts, Category, PostComment
 
 
 # Create your views here.
@@ -73,6 +73,15 @@ class PostDetailView(DetailView):
     template_name = "blog/postView.html"
     context_object_name = "post"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # On ajoute le formulaire vierge
+        context['comment_form'] = PostCommentForm()
+        # On récupère les commentaires liés à ce post
+        context['comments'] = self.object.comments.all()  # Nécessite related_name='comments' dans le modèle
+        return context
+
+
 
 class UpdatePostView(UpdateView):
     model = Posts
@@ -97,3 +106,24 @@ class DeletePostView(DeleteView):
         return Posts.objects.filter(author=self.request.user)
 
 
+
+# Post
+class PostCommentView(ListView):
+    model = PostComment
+    template_name = "blog/postList.html"
+    context_object_name = "comments"
+
+class CreateCommentView(CreateView):
+    model = PostComment
+    form_class = PostCommentForm
+
+    def form_valid(self, form):
+        # On lie l'auteur
+        form.instance.author = self.request.user
+        # On lie le post grâce à l'ID dans l'URL (ex: <int:post_id>)
+        form.instance.post = Posts.objects.get(pk=self.kwargs['post_id'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirige vers le post après le commentaire
+        return reverse_lazy('blog:postdetail', kwargs={'pk': self.kwargs['post_id']})
