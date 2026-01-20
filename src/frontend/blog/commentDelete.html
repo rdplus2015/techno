@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    <p>Es-tu sûr de vouloir supprimer ce commentaire ?</p>
+    <button type="submit">Confirmer la suppression</button>
+    <a href="{{ object.post.get_absolute_url }}">Annuler</a>
+</form>

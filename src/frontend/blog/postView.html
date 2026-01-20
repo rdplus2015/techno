@@ -74,6 +74,10 @@
                     <h3>Commentaires</h3>
                     {% for comment in comments %}
                         <p><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
+                        {% if comment.author == request.user %}
+                            <a href="{% url 'deletecomment' comment.pk %}">Supprimer</a>
+                        {% endif %}
+
                     {% empty %}
                         <p>Aucun commentaire pour le moment.</p>
                     {% endfor %}

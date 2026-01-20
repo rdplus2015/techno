@@ -122,3 +122,15 @@ class CreateCommentView(CreateView):
     def get_success_url(self):
         # Redirige vers le post après le commentaire
         return reverse_lazy('postdetail', kwargs={'slug': self.kwargs['post_slug']})
+
+
+class DeleteCommentView(DeleteView):
+    model = PostComment
+    template_name = "blog/commentDelete.html"
+
+    def get_queryset(self):
+        # Sécurité : on ne peut supprimer que ses propres commentaires
+        return self.model.objects.filter(author=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('postdetail', kwargs={'slug': self.object.post.slug})
