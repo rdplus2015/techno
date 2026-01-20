@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container">
+    <h1>Mes articles sauvegardés</h1>
+    <hr>
+
+    <div class="posts-grid">
+        {% for post in posts %}
+            <article class="post-item">
+                <h2><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h2>
+                <p>Catégories : 
+                    {% for cat in post.category.all %}
+                        <span>{{ cat.name }}</span>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p>{{ post.description|truncatewords:20 }}</p>
+                
+                <form method="post" action="{% url 'save_post' post.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Retirer des favoris</button>
+                </form>
+            </article>
+            <hr>
+        {% empty %}
+            <p>Vous n'avez pas encore d'articles sauvegardés.</p>
+            <a href="{% url 'index' %}" class="btn">Parcourir les articles</a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

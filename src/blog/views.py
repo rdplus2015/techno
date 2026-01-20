@@ -2,6 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from blog.forms import PostForm, PostCommentForm
 from blog.models import Posts, Category, PostComment
+from django.shortcuts import get_object_or_404, redirect
+from django.views import View
+from .models import Posts, SavedPost
 
 
 # Create your views here.
@@ -134,3 +137,29 @@ class DeleteCommentView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('postdetail', kwargs={'slug': self.object.post.slug})
+
+
+
+
+class ToggleSavePostView(View):
+    def post(self, request, slug):
+        post_obj = get_object_or_404(Posts, slug=slug)
+        # On cherche si l'objet existe
+        saved_post_qs = SavedPost.objects.filter(user=request.user, post=post_obj)
+
+        if saved_post_qs.exists():
+            saved_post_qs.delete()  # On retire des favoris
+        else:
+            SavedPost.objects.create(user=request.user, post=post_obj)  # On ajoute
+
+        return redirect('postdetail', slug=slug)
+
+class SavedPostsListView(ListView):
+    model = Posts
+    template_name = "blog/savedPosts.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        # On récupère les posts où l'utilisateur actuel est présent dans 'saved_by'
+        return Posts.objects.filter(saved_by=self.request.user)
+

@@ -2,7 +2,8 @@ from django.urls import path
 from django.views.generic import ListView
 
 from blog.views import CreatePostView, ListPostsView, CreateCategoryView, PostDetailView, DeletePostView, \
-    ListCategoryView, UpdateCategoryView, DeleteCategoryView, UpdatePostView, CreateCommentView, DeleteCommentView
+    ListCategoryView, UpdateCategoryView, DeleteCategoryView, UpdatePostView, CreateCommentView, DeleteCommentView, \
+    ToggleSavePostView, SavedPostsListView
 
 urlpatterns = [
     # Post URLS
@@ -22,4 +23,8 @@ urlpatterns = [
     #Comments
     path('testcomment/<slug:post_slug>/', CreateCommentView.as_view(), name='testcomment'),
     path('comment/<int:pk>/delete/', DeleteCommentView.as_view(), name='deletecomment'),
+
+    # Saved post
+    path('post/<slug:slug>/save/', ToggleSavePostView.as_view(), name='savepost'),
+    path('savedposts/', SavedPostsListView.as_view(), name='savedposts'),
 ]
