@@ -1,18 +1,18 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from blog.forms import PostForm, PostCommentForm
-from blog.models import Posts, Category, PostComment
 from django.shortcuts import get_object_or_404, redirect
 from django.views import View
-from .models import Posts, SavedPost
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+from blog.forms import PostForm, PostCommentForm
+from blog.models import Posts, Category, PostComment, SavedPost
 
-# Create your views here.
+# --- CATEGORY CRUD VIEWS ---
 
-# Categories crud
-class CreateCategoryView(CreateView):
+class CreateCategoryView(LoginRequiredMixin, CreateView):
+    """View to create a new category. Restricts name field and assigns current user as author."""
     model = Category
-    fields = ["name"] # Use field instead pf a form
+    fields = ["name"]
     template_name = "blog/admin/categoryCreate.html"
     success_url = reverse_lazy("listecategories")
 
@@ -21,9 +21,9 @@ class CreateCategoryView(CreateView):
         return super().form_valid(form)
 
 
-class ListCategoryView(ListView):
+class ListCategoryView(LoginRequiredMixin, ListView):
+    """Displays a list of categories created by the authenticated user."""
     model = Category
-    fields = ["name"]
     template_name = "blog/admin/categoryList.html"
     context_object_name = "categories"
 
@@ -31,7 +31,8 @@ class ListCategoryView(ListView):
         return Category.objects.filter(author=self.request.user).order_by("name")
 
 
-class UpdateCategoryView(UpdateView):
+class UpdateCategoryView(LoginRequiredMixin, UpdateView):
+    """View to update an existing category. Ensures only the author can edit."""
     model = Category
     template_name = "blog/admin/categoryUpdate.html"
     fields = ["name"]
@@ -40,12 +41,9 @@ class UpdateCategoryView(UpdateView):
     def get_queryset(self):
         return Category.objects.filter(author=self.request.user)
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-
-class DeleteCategoryView(DeleteView):
+class DeleteCategoryView(LoginRequiredMixin, DeleteView):
+    """View to delete a category with author-only permission."""
     model = Category
     template_name = "blog/admin/categoryDelete.html"
     success_url = reverse_lazy("listecategories")
@@ -54,8 +52,10 @@ class DeleteCategoryView(DeleteView):
         return Category.objects.filter(author=self.request.user)
 
 
-# Posts view
-class CreatePostView(CreateView):
+# --- POST CRUD VIEWS ---
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    """Handles blog post creation using a custom PostForm."""
     model = Posts
     form_class = PostForm
     template_name = "blog/admin/postCreate.html"
@@ -65,27 +65,29 @@ class CreatePostView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
 class ListPostsView(ListView):
+    """Public view to list all blog posts."""
     model = Posts
     template_name = "blog/postList.html"
     context_object_name = "posts"
 
 
 class PostDetailView(DetailView):
+    """Displays a single post content and injects the comment form/list into the context."""
     model = Posts
     template_name = "blog/postView.html"
     context_object_name = "post"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # On ajoute le formulaire vierge
         context['comment_form'] = PostCommentForm()
-        # On récupère les commentaires liés à ce post
-        context['comments'] = self.object.comments.all()  # Nécessite related_name='comments' dans le modèle
+        context['comments'] = self.object.comments.all()
         return context
 
 
-class UpdatePostView(UpdateView):
+class UpdatePostView(LoginRequiredMixin, UpdateView):
+    """Updates a post, restricted to the original author."""
     model = Posts
     template_name = "blog/admin/postUpdate.html"
     form_class = PostForm
@@ -94,12 +96,9 @@ class UpdatePostView(UpdateView):
     def get_queryset(self):
         return Posts.objects.filter(author=self.request.user)
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-
-class DeletePostView(DeleteView):
+class DeletePostView(LoginRequiredMixin, DeleteView):
+    """Deletes a post, restricted to the original author."""
     model = Posts
     template_name = "blog/admin/postDelete.html"
     success_url = reverse_lazy("index")
@@ -108,67 +107,65 @@ class DeletePostView(DeleteView):
         return Posts.objects.filter(author=self.request.user)
 
 
+# --- COMMENT VIEWS ---
 
-# comments
-class CreateCommentView(CreateView):
+class CreateCommentView(LoginRequiredMixin, CreateView):
+    """Handles comment submission linked to a specific post via its slug."""
     model = PostComment
     form_class = PostCommentForm
 
     def form_valid(self, form):
-        # On lie l'auteur
         form.instance.author = self.request.user
-        # On lie le post grâce à l'ID dans l'URL (ex: <int:post_id>)
         form.instance.post = Posts.objects.get(slug=self.kwargs['post_slug'])
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Redirige vers le post après le commentaire
         return reverse_lazy('postdetail', kwargs={'slug': self.kwargs['post_slug']})
 
 
-class DeleteCommentView(DeleteView):
+class DeleteCommentView(LoginRequiredMixin, DeleteView):
+    """Allows users to delete their own comments."""
     model = PostComment
     template_name = "blog/commentDelete.html"
 
     def get_queryset(self):
-        # Sécurité : on ne peut supprimer que ses propres commentaires
         return self.model.objects.filter(author=self.request.user)
 
     def get_success_url(self):
         return reverse_lazy('postdetail', kwargs={'slug': self.object.post.slug})
 
 
-class ToggleSavePostView(View):
+# --- INTERACTION & FAVORITES VIEWS ---
+
+class ToggleSavePostView(LoginRequiredMixin, View):
+    """Toggles a post between saved and unsaved status for the current user."""
     def post(self, request, slug):
         post_obj = get_object_or_404(Posts, slug=slug)
-        # On cherche si l'objet existe
         saved_post_qs = SavedPost.objects.filter(user=request.user, post=post_obj)
 
         if saved_post_qs.exists():
-            saved_post_qs.delete()  # On retire des favoris
+            saved_post_qs.delete()
         else:
-            SavedPost.objects.create(user=request.user, post=post_obj)  # On ajoute
+            SavedPost.objects.create(user=request.user, post=post_obj)
 
         return redirect('postdetail', slug=slug)
 
-class SavedPostsListView(ListView):
+
+class SavedPostsListView(LoginRequiredMixin, ListView):
+    """Displays all posts previously saved by the user."""
     model = Posts
     template_name = "blog/savedPosts.html"
     context_object_name = "posts"
 
     def get_queryset(self):
-        # On récupère les posts où l'utilisateur actuel est présent dans 'saved_by'
         return Posts.objects.filter(saved_by=self.request.user)
 
 
-class CreatedPostsListView(ListView):
+class CreatedPostsListView(LoginRequiredMixin, ListView):
+    """Admin-style view listing only posts created by the logged-in user."""
     model = Posts
     template_name = "blog/admin/createdPosts.html"
     context_object_name = "posts"
 
     def get_queryset(self):
         return Posts.objects.filter(author=self.request.user)
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
