@@ -2,14 +2,15 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.shortcuts import get_object_or_404, redirect
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.forms import PostForm, PostCommentForm
 from blog.models import Posts, Category, PostComment, SavedPost
+from techno.mixims import TechnoLoginRequiredMixin
+
 
 # --- CATEGORY CRUD VIEWS ---
 
-class CreateCategoryView(LoginRequiredMixin, CreateView):
+class CreateCategoryView(TechnoLoginRequiredMixin, CreateView):
     """View to create a new category. Restricts name field and assigns current user as author."""
     model = Category
     fields = ["name"]
@@ -21,7 +22,7 @@ class CreateCategoryView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ListCategoryView(LoginRequiredMixin, ListView):
+class ListCategoryView(TechnoLoginRequiredMixin, ListView):
     """Displays a list of categories created by the authenticated user."""
     model = Category
     template_name = "blog/admin/categoryList.html"
@@ -31,7 +32,7 @@ class ListCategoryView(LoginRequiredMixin, ListView):
         return Category.objects.filter(author=self.request.user).order_by("name")
 
 
-class UpdateCategoryView(LoginRequiredMixin, UpdateView):
+class UpdateCategoryView(TechnoLoginRequiredMixin, UpdateView):
     """View to update an existing category. Ensures only the author can edit."""
     model = Category
     template_name = "blog/admin/categoryUpdate.html"
@@ -42,7 +43,7 @@ class UpdateCategoryView(LoginRequiredMixin, UpdateView):
         return Category.objects.filter(author=self.request.user)
 
 
-class DeleteCategoryView(LoginRequiredMixin, DeleteView):
+class DeleteCategoryView(TechnoLoginRequiredMixin,DeleteView):
     """View to delete a category with author-only permission."""
     model = Category
     template_name = "blog/admin/categoryDelete.html"
@@ -54,7 +55,7 @@ class DeleteCategoryView(LoginRequiredMixin, DeleteView):
 
 # --- POST CRUD VIEWS ---
 
-class CreatePostView(LoginRequiredMixin, CreateView):
+class CreatePostView(TechnoLoginRequiredMixin, CreateView):
     """Handles blog post creation using a custom PostForm."""
     model = Posts
     form_class = PostForm
@@ -86,7 +87,7 @@ class PostDetailView(DetailView):
         return context
 
 
-class UpdatePostView(LoginRequiredMixin, UpdateView):
+class UpdatePostView(TechnoLoginRequiredMixin, UpdateView):
     """Updates a post, restricted to the original author."""
     model = Posts
     template_name = "blog/admin/postUpdate.html"
@@ -97,7 +98,7 @@ class UpdatePostView(LoginRequiredMixin, UpdateView):
         return Posts.objects.filter(author=self.request.user)
 
 
-class DeletePostView(LoginRequiredMixin, DeleteView):
+class DeletePostView(TechnoLoginRequiredMixin, DeleteView):
     """Deletes a post, restricted to the original author."""
     model = Posts
     template_name = "blog/admin/postDelete.html"
@@ -109,7 +110,7 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
 
 # --- COMMENT VIEWS ---
 
-class CreateCommentView(LoginRequiredMixin, CreateView):
+class CreateCommentView(TechnoLoginRequiredMixin, CreateView):
     """Handles comment submission linked to a specific post via its slug."""
     model = PostComment
     form_class = PostCommentForm
@@ -123,7 +124,7 @@ class CreateCommentView(LoginRequiredMixin, CreateView):
         return reverse_lazy('postdetail', kwargs={'slug': self.kwargs['post_slug']})
 
 
-class DeleteCommentView(LoginRequiredMixin, DeleteView):
+class DeleteCommentView(TechnoLoginRequiredMixin, DeleteView):
     """Allows users to delete their own comments."""
     model = PostComment
     template_name = "blog/commentDelete.html"
@@ -137,7 +138,7 @@ class DeleteCommentView(LoginRequiredMixin, DeleteView):
 
 # --- INTERACTION & FAVORITES VIEWS ---
 
-class ToggleSavePostView(LoginRequiredMixin, View):
+class ToggleSavePostView(TechnoLoginRequiredMixin, View):
     """Toggles a post between saved and unsaved status for the current user."""
     def post(self, request, slug):
         post_obj = get_object_or_404(Posts, slug=slug)
@@ -151,7 +152,7 @@ class ToggleSavePostView(LoginRequiredMixin, View):
         return redirect('postdetail', slug=slug)
 
 
-class SavedPostsListView(LoginRequiredMixin, ListView):
+class SavedPostsListView(TechnoLoginRequiredMixin, ListView):
     """Displays all posts previously saved by the user."""
     model = Posts
     template_name = "blog/savedPosts.html"
@@ -161,7 +162,7 @@ class SavedPostsListView(LoginRequiredMixin, ListView):
         return Posts.objects.filter(saved_by=self.request.user)
 
 
-class CreatedPostsListView(LoginRequiredMixin, ListView):
+class CreatedPostsListView(TechnoLoginRequiredMixin, ListView):
     """Admin-style view listing only posts created by the logged-in user."""
     model = Posts
     template_name = "blog/admin/createdPosts.html"
