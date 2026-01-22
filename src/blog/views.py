@@ -13,7 +13,7 @@ from .models import Posts, SavedPost
 class CreateCategoryView(CreateView):
     model = Category
     fields = ["name"] # Use field instead pf a form
-    template_name = "blog/categoryCreate.html"
+    template_name = "blog/admin/categoryCreate.html"
     success_url = reverse_lazy("listecategories")
 
     def form_valid(self, form):
@@ -24,7 +24,7 @@ class CreateCategoryView(CreateView):
 class ListCategoryView(ListView):
     model = Category
     fields = ["name"]
-    template_name = "blog/categoryList.html"
+    template_name = "blog/admin/categoryList.html"
     context_object_name = "categories"
 
     def get_queryset(self):
@@ -33,7 +33,7 @@ class ListCategoryView(ListView):
 
 class UpdateCategoryView(UpdateView):
     model = Category
-    template_name = "blog/categoryUpdate.html"
+    template_name = "blog/admin/categoryUpdate.html"
     fields = ["name"]
     success_url = reverse_lazy("listecategories")
 
@@ -47,7 +47,7 @@ class UpdateCategoryView(UpdateView):
 
 class DeleteCategoryView(DeleteView):
     model = Category
-    template_name = "blog/categoryDelete.html"
+    template_name = "blog/admin/categoryDelete.html"
     success_url = reverse_lazy("listecategories")
 
     def get_queryset(self):
@@ -58,7 +58,7 @@ class DeleteCategoryView(DeleteView):
 class CreatePostView(CreateView):
     model = Posts
     form_class = PostForm
-    template_name = "blog/postCreate.html"
+    template_name = "blog/admin/postCreate.html"
     success_url = reverse_lazy("index")
 
     def form_valid(self, form):
@@ -88,7 +88,7 @@ class PostDetailView(DetailView):
 
 class UpdatePostView(UpdateView):
     model = Posts
-    template_name = "blog/postUpdate.html"
+    template_name = "blog/admin/postUpdate.html"
     form_class = PostForm
     success_url = reverse_lazy("index")
 
@@ -102,7 +102,7 @@ class UpdatePostView(UpdateView):
 
 class DeletePostView(DeleteView):
     model = Posts
-    template_name = "blog/postDelete.html"
+    template_name = "blog/admin/postDelete.html"
     success_url = reverse_lazy("index")
 
     def get_queryset(self):
@@ -129,7 +129,7 @@ class CreateCommentView(CreateView):
 
 class DeleteCommentView(DeleteView):
     model = PostComment
-    template_name = "blog/commentDelete.html"
+    template_name = "blog/admin/commentDelete.html"
 
     def get_queryset(self):
         # Sécurité : on ne peut supprimer que ses propres commentaires
@@ -137,7 +137,6 @@ class DeleteCommentView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('postdetail', kwargs={'slug': self.object.post.slug})
-
 
 
 
