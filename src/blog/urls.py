@@ -3,7 +3,7 @@ from django.views.generic import ListView
 
 from blog.views import CreatePostView, ListPostsView, CreateCategoryView, PostDetailView, DeletePostView, \
     ListCategoryView, UpdateCategoryView, DeleteCategoryView, UpdatePostView, CreateCommentView, DeleteCommentView, \
-    ToggleSavePostView, SavedPostsListView
+    ToggleSavePostView, SavedPostsListView, CreatedPostsListView
 
 urlpatterns = [
     # Post URLS
@@ -13,6 +13,7 @@ urlpatterns = [
     path('deletepost/<slug:slug>/', DeletePostView.as_view(), name='deletepost'),
     path('updatepost/<int:pk>/edit/', UpdatePostView.as_view(), name='updatepost'),
     path('deletepost/<slug:slug>/', DeletePostView.as_view(), name='deletepost'),
+    path('createdPosts/', CreatedPostsListView.as_view(), name='createdposts'),
 
     # Category URLS
     path('createcategory/', CreateCategoryView.as_view(), name='createcategory'),

@@ -85,7 +85,6 @@ class PostDetailView(DetailView):
         return context
 
 
-
 class UpdatePostView(UpdateView):
     model = Posts
     template_name = "blog/admin/postUpdate.html"
@@ -129,7 +128,7 @@ class CreateCommentView(CreateView):
 
 class DeleteCommentView(DeleteView):
     model = PostComment
-    template_name = "blog/admin/commentDelete.html"
+    template_name = "blog/commentDelete.html"
 
     def get_queryset(self):
         # Sécurité : on ne peut supprimer que ses propres commentaires
@@ -137,7 +136,6 @@ class DeleteCommentView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('postdetail', kwargs={'slug': self.object.post.slug})
-
 
 
 class ToggleSavePostView(View):
@@ -162,3 +160,15 @@ class SavedPostsListView(ListView):
         # On récupère les posts où l'utilisateur actuel est présent dans 'saved_by'
         return Posts.objects.filter(saved_by=self.request.user)
 
+
+class CreatedPostsListView(ListView):
+    model = Posts
+    template_name = "blog/admin/createdPosts.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        return Posts.objects.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

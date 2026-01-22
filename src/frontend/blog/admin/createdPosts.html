@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+
+<main class="container">
+    <h1>My created Posts</h1>
+    <hr>
+
+    <div class="posts-grid">
+        {% for post in posts %}
+            <article class="post-item">
+                <h2><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h2>
+                <p>Catégories :
+                    {% for cat in post.category.all %}
+                        <span>{{ cat.name }}</span>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p>{{ post.description|truncatewords:20 }}</p>
+                <div>
+                    <form method="post" action="{% url 'savepost' post.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Retirer des favoris</button>
+                    </form>
+                </div>
+                <div>
+                    <a href="{% url 'postdetail' post.slug %} ">view</a>
+                    <a href="{% url 'updatepost' post.pk %} ">update</a>
+                    <a href="{% url 'deletepost' post.slug %} ">delete</a>
+                </div>
+            </article>
+            <hr>
+        {% empty %}
+            <p>Vous n'avez pas encore d'articles sauvegardés.</p>
+            <a href="{% url 'index' %}" class="btn">Parcourir les articles</a>
+        {% endfor %}
+    </div>
+</main>
