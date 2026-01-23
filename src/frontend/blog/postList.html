@@ -3,6 +3,52 @@
 {% block title %} {% endblock %}
 {%block main%} 
     <main>
+           <section class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">Techno Blog</span>
+                    <h1>Immersive stories on cloud, AI, and the future of engineering.</h1>
+                    <p>
+                        Dive into in-depth tutorials, architecture breakdowns, and design thinking
+                        from builders shaping modern tech.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="hero-button primary" href="#latest-posts">Explore latest posts</a>
+                        <a class="hero-button ghost" href="{% url 'signup' %}">Join the community</a>
+                    </div>
+                    <div class="hero-meta">
+                        <div>
+                            <strong>120+</strong>
+                            <span>hands-on guides</span>
+                        </div>
+                        <div>
+                            <strong>30+</strong>
+                            <span>industry contributors</span>
+                        </div>
+                        <div>
+                            <strong>Weekly</strong>
+                            <span>new releases</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-card">
+                        <p class="hero-card-title">Signal</p>
+                        <h3>Latency matters.</h3>
+                        <p class="hero-card-copy">
+                            Optimize distributed systems with profiling workflows that ship 40% faster.
+                        </p>
+                    </div>
+                    <div class="hero-card accent">
+                        <p class="hero-card-title">Blueprint</p>
+                        <h3>AI-ready stacks.</h3>
+                        <p class="hero-card-copy">
+                            Reference architectures designed for secure, scalable inference pipelines.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Blog navigation -->
         <section class="category-section">
             <div class="container">

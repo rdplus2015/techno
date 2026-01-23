@@ -85,6 +85,182 @@
 }
 
 
+
+
+/* Hero section */
+.hero-section{
+        position: relative;
+        overflow: hidden;
+}
+
+.hero-section::before{
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.2), transparent 55%),
+                    radial-gradient(circle at 80% 10%, rgba(10, 122, 255, 0.18), transparent 45%),
+                    radial-gradient(circle at 50% 80%, rgba(64, 117, 252, 0.14), transparent 50%);
+        pointer-events: none;
+}
+
+.hero-section .hero-grid{
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+        align-items: center;
+        padding: 60px 10px;
+}
+
+.hero-section .hero-content{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+}
+
+.hero-section .hero-badge{
+        align-self: flex-start;
+        font-size: 0.75rem;
+        letter-spacing: 0.12rem;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(88, 166, 255, 0.18);
+        color: var(--color-main);
+        border: 1px solid rgba(88, 166, 255, 0.35);
+}
+
+.hero-section .hero-content h1{
+        font-size: 2.6rem;
+        line-height: 1.1;
+        margin: 0;
+}
+
+.hero-section .hero-content p{
+        color: var(--color-main-sec);
+        font-size: 1.05rem;
+        max-width: 520px;
+}
+
+.hero-section .hero-actions{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+}
+
+.hero-section .hero-button{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-weight: 600;
+        border: 1px solid transparent;
+        transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.hero-section .hero-button.primary{
+        background: linear-gradient(135deg, #58a6ff, #4c84ff);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(88, 166, 255, 0.25);
+}
+
+.hero-section .hero-button.ghost{
+        border-color: rgba(240, 244, 248, 0.2);
+        color: var(--color-main);
+        background: rgba(21, 27, 35, 0.6);
+}
+
+.hero-section .hero-button:hover{
+        box-shadow: 0 14px 30px rgba(88, 166, 255, 0.25);
+        color: #fff;
+}
+
+.hero-section .hero-meta{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 10px;
+        color: var(--color-main-sec);
+        font-size: 0.85rem;
+}
+
+.hero-section .hero-meta strong{
+        display: block;
+        color: var(--color-main);
+        font-size: 1.1rem;
+}
+
+.hero-section .hero-visual{
+        display: grid;
+        gap: 20px;
+}
+
+.hero-section .hero-card{
+        background: rgba(21, 27, 35, 0.95);
+        border-radius: 18px;
+        padding: 24px;
+        border: 1px solid rgba(88, 166, 255, 0.2);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(6px);
+}
+
+.hero-section .hero-card.accent{
+        border-color: rgba(88, 166, 255, 0.4);
+        background: linear-gradient(150deg, rgba(21, 27, 35, 0.9), rgba(15, 37, 79, 0.9));
+}
+
+.hero-section .hero-card-title{
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        font-size: 0.7rem;
+        color: var(--color-main-light);
+}
+
+.hero-section .hero-card h3{
+        margin: 8px 0;
+        font-size: 1.6rem;
+}
+
+.hero-section .hero-card-copy{
+        color: var(--color-main-sec);
+        font-size: 0.95rem;
+}
+
+@media (max-width: 960px){
+        .hero-section .hero-grid{
+                grid-template-columns: 1fr;
+                padding: 40px 10px;
+        }
+
+        .hero-section .hero-content h1{
+                font-size: 2.2rem;
+        }
+
+        .hero-section .hero-meta{
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+}
+
+@media (max-width: 600px){
+        .hero-section .hero-content h1{
+                font-size: 2rem;
+        }
+
+        .hero-section .hero-meta{
+                grid-template-columns: 1fr;
+        }
+}
+
+
+
+
+
+
+
+
+
+
 /*Category section*/ 
 .category-section{
         display: none;
