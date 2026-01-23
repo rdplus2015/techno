@@ -14,7 +14,11 @@
                     </p>
                     <div class="hero-actions">
                         <a class="hero-button primary" href="#latest-posts">Explore latest posts</a>
-                        <a class="hero-button ghost" href="{% url 'signup' %}">Join the community</a>
+                         {% if user.is_authenticated %}
+                            <a class="hero-button ghost" href="{% url 'profile' %}">Join the community</a>
+                         {% else %}
+                              <a class="hero-button ghost" href="{% url 'login' %}">Join the community</a>
+                         {% endif %}
                     </div>
                     <div class="hero-meta">
                         <div>
@@ -53,7 +57,7 @@
         <!-- Blog navigation -->
             <div class="container">
                     <!-- Categories filter-->
-                    <h2 class="head-badge"> Latest Posts</h2>
+                    <h2 class="head-badge" id="latest-posts"> Latest Posts</h2>
             </div>
 
          <!-- Blog Post Section -->
@@ -110,8 +114,8 @@
 
                     <div class="author-container">
                         <picture>
-                            <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
+                            <source srcset="{% static 'img/defautUser.png' %}" type="image/webp" loading="lazy">
+                            <img src="{% static 'img/defautUser.png' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>
                         <p style="color: #cccccc"> {{post.author.profile.name}}  </p>
                     </div>
