@@ -3,8 +3,8 @@
 {% block title %} {% endblock %}
 {%block main%} 
     <main>
-           <section class="hero-section">
-            <div class="container hero-grid">
+           <section class="container hero-section">
+            <div class=" hero-grid">
                 <div class="hero-content">
                     <span class="hero-badge">Techno Blog</span>
                     <h1>Immersive stories on cloud, AI, and the future of engineering.</h1>
@@ -49,25 +49,15 @@
                 </div>
             </div>
         </section>
-        <!-- Blog navigation -->
-        <section class="category-section">
-            <div class="container">
-                <nav>
-                    <!-- Categories filter-->
-                    <h3> Categories</h3>
-                    <ul>
-                        <li> Python </li>
-                        <li> Java </li>
-                        <li> Infrastrucre as Code </li>
-                        <li> Networking </li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
 
+        <!-- Blog navigation -->
+            <div class="container">
+                    <!-- Categories filter-->
+                    <h2 class="head-badge"> Latest Posts</h2>
+            </div>
 
          <!-- Blog Post Section -->
-        <section class="post-section">
+        <section class="post-section ">
             <div class="container post-list">
                 {% for post in posts %}
                 <article class="post-container">
@@ -117,7 +107,7 @@
                             <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
                             <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>
-                        <p> <span style="color: #cccccc"> {{post.author.pseudonym}} </span>  | {{post.author.profile.name}}  </p>
+                        <p style="color: #cccccc"> {{post.author.profile.name}}  </p>
                     </div>
 
                     <a href=" {% url 'postdetail' post.slug %} " class="read-more">

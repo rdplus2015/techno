@@ -13,7 +13,7 @@
     --color-link-hover: #0056b3; /* Color on hover for links */
 
     --color-input-border: #ccc; /* Color for input field borders */
-    --color-border:  rgba(255, 255, 255, 0.1);  /*border color*/
+    --color-border: rgba(104, 150, 229, 0.05);  /*border color*/
     --color-btn-bg: #007bff; /* Background color for buttons */
     --color-btn: #fff; /* Text color for buttons */ 
     --color-btn-hover: #0056b3; /* Background color for buttons on hover */
