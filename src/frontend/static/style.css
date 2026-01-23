@@ -378,6 +378,15 @@
 }
 
 
+/* Save button*/
+.save-btn{
+        background-color: var(--color-main-bg); /* Sets background color for buttons */
+        border: none; /* Removes border for a cleaner look */
+}
+.save-btn:hover{
+        background-color: var(--color-main-bg); /* Sets background color for buttons */
+}
+
 /* SighUp form */ 
 
 .registration-form-section .container{
