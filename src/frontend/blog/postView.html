@@ -58,11 +58,11 @@
                     </div>
 
                     <div class="author-container">
-                        <picture>
-                            <source srcset="{% static 'img/user0.webp' %}" type="image/webp" loading="lazy">
-                            <img src="{% static 'img/user0.jpg' %}" class="author-img" alt="user-image" loading="lazy">
+                         <picture>
+                            <source srcset="{% static 'img/defautUser.png' %}" type="image/webp" loading="lazy">
+                            <img src="{% static 'img/defautUser.png' %}" class="author-img" alt="user-image" loading="lazy">
                         </picture>
-                        <p> <span style="color: #cccccc"> {{post.author.pseudonym}} </span>  | {{post.author.profile.name}}  </p>
+                        <p> {{post.author.profile.name}}  </p>
                     </div>
 
                     <a href=" {% url 'index' %} " class="read-more">
@@ -74,19 +74,19 @@
 
                 </article>
                 <article>
-                    <hr>
-                    <h3>Commentaires</h3>
-                    {% for comment in comments %}
-                        <p><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
+                    <h3 class="head-badge">Commentaires</h3>
+                    <div class="comment-section">
+                         {% for comment in comments %}
+                            <p class="comment-author">{{ comment.author.profile.name }}:</p>
+                            <p class="comment-content">{{ comment.content }}</p>
                         {% if comment.author == request.user %}
-                            <a href="{% url 'deletecomment' comment.pk %}">Supprimer</a>
+                            <a href="{% url 'deletecomment' comment.pk %}" class="comment-delete">Supprimer</a>
                         {% endif %}
-
-                    {% empty %}
+                        {% empty %}
                         <p>Aucun commentaire pour le moment.</p>
-                    {% endfor %}
-
-                    <hr>
+                    </div>
+                     {% endfor %}
+                    <hr class="comment-line">
                     <form method="post" action="{% url 'testcomment' post.slug %}">
                         {% csrf_token %}
                         {{ comment_form.as_p }}
