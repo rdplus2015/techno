@@ -455,3 +455,14 @@
 .input-container{
         padding: 20px 40px;
 }
+
+.profile-user-container{
+        display: flex;
+}
+
+.profile-user-link{
+        margin: 2px 25px 25px 0;
+}
+.profile-user-infos{
+        margin: 25px 0 25px 0;
+}
