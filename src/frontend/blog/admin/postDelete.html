@@ -1,5 +1,17 @@
-<form method="post">
-  {% csrf_token %}
-  <p>Delete Post "{{ object.title }}" ?</p>
-  <button type="submit">Yes, delete</button>
-</form>
+
+{% extends "base.html" %}
+{% block title %} update user  {% endblock %}
+{% block main %}
+
+<div class="registration-form-section">
+  <div class="container">
+    <h2>Delete the post </h2>
+
+    <form method="post">
+      {% csrf_token %}
+      <p>Delete Post "{{ object.title }}" ?</p>
+      <button type="submit">Yes, delete</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

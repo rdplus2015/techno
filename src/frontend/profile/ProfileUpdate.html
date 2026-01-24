@@ -2,11 +2,15 @@
 {% block title %} update user  {% endblock %}
 {% block main %}
 <main>
-    <h1> Update user </h1>
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">update</button>
-    </form>
+    <div class="registration-form-section">
+       <div class="container">
+           <h1> Update your profile </h1>
+            <form method="post">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit">update</button>
+            </form>
+       </div>
+    </div>
 </main>
 {% endblock %}
