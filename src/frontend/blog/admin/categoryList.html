@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for category in categories %}
-<p> {{ category.name }}
-    <a href="{% url 'updatecategory' category.pk %} ">update</a>
-    <a href="{% url 'deletecatgory' category.pk %} ">delete</a>
-
-</p>
-
+{% extends "base.html" %}
+{% block title %} update user  {% endblock %}
+{% block main %}
+<div class="registration-form-section">
+    <div class="container">
+        {% for category in categories %}
+        <p> {{ category.name }}
+            <a href="{% url 'updatecategory' category.pk %} ">update</a>
+            <a href="{% url 'deletecatgory' category.pk %} ">delete</a>
+        </p>
+    </div>
+</div>
 {% endfor %}
-</body>
-</html>
+{% endblock %}
