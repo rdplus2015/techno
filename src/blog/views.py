@@ -62,6 +62,11 @@ class CreatePostView(TechnoLoginRequiredMixin, CreateView):
     template_name = "blog/admin/postCreate.html"
     success_url = reverse_lazy("index")
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['category'].queryset = Category.objects.filter(author=self.request.user)
+        return form
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
