@@ -1,17 +1,15 @@
-
-
 {% extends "base.html" %}
-{% block title %} update user  {% endblock %}
+{% block title %} Update user {% endblock %}
 {% block main %}
 <div class="registration-form-section">
     <div class="container">
         <main>
-            <h1>Mes articles sauvegardés</h1>
+            <h1>Saved posts</h1>
             <div class="posts-grid">
                 {% for post in posts %}
                     <article class="post-item">
                         <h2><a href="{% url 'postdetail' post.slug %}">{{ post.title }}</a></h2>
-                        <p>Catégories :
+                        <p>Categories:
                             {% for cat in post.category.all %}
                                 <span>{{ cat.name }}</span>{% if not forloop.last %}, {% endif %}
                             {% endfor %}
@@ -21,14 +19,14 @@
                         <div style="margin-bottom:50px ">
                             <form method="post" action="{% url 'savepost' post.slug %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Retirer des favoris</button>
+                            <button type="submit" class="btn btn-danger">Remove from favorites</button>
                         </form>
                         </div>
                     </article>
 
                 {% empty %}
-                    <p>Vous n'avez pas encore d'articles sauvegardés.</p>
-                    <a href="{% url 'index' %}" class="btn">Parcourir les articles</a>
+                    <p>You have not saved any posts yet.</p>
+                    <a href="{% url 'index' %}" class="btn">Browse posts</a>
                 {% endfor %}
             </div>
         </main>

@@ -6,9 +6,12 @@
         {% for category in categories %}
         <p> {{ category.name }}
             <a href="{% url 'updatecategory' category.pk %} ">update</a>
-            <a href="{% url 'deletecatgory' category.pk %} ">delete</a>
+            <a href="{% url 'deletecategory' category.pk %} ">delete</a>
         </p>
+        {% endfor %}
+        <p><a href="{% url 'createcategory' %}"> Create a new Category</a></p>
+        <p><a href="{% url 'profile' %}"> Manage Posts</a></p>
     </div>
 </div>
-{% endfor %}
+
 {% endblock %}
