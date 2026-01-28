@@ -78,6 +78,9 @@ class ListPostsView(ListView):
     template_name = "blog/postList.html"
     context_object_name = "posts"
 
+    def get_queryset(self):
+        return Posts.objects.filter(status=True)
+
 
 class PostDetailView(DetailView):
     """Displays a single post content and injects the comment form/list into the context."""
