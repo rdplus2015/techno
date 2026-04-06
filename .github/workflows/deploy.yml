@@ -56,7 +56,7 @@ jobs:
           python manage.py test --verbosity=2
 
   deploy:
-    name: Deploy to AWS EBS
+    name: Deploy to AWS EBS (Immutable)
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/ci-cd' && github.event_name == 'push'
@@ -94,5 +94,6 @@ jobs:
           environment_name: TechnoBlog-prod
           region: us-east-2
           deployment_package: app.zip
-          wait_for_environment_recovery: 120
-          version_label: 'v1'
+          version_label: ${{ github.sha }}
+          deployment_policy: Immutable
+          wait_for_environment_recovery: 180
